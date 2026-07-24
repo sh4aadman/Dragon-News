@@ -16,14 +16,14 @@ function Navbar() {
     </>
   );
 
-    return <nav className="mt-5 flex justify-between items-center">
+    return <nav className="my-6 flex justify-between items-center">
         <div className="basis-40"></div>
         <ul className="flex items-center gap-4 text-base-300 text-lg leading-7">
             { navLinks}
         </ul>
         <section className="flex items-center gap-2.5">
             <img className="w-10" src={userIcon} alt="user-icon" />
-            <Link to={"/auth"} className="bg-primary px-10 py-2 text-white">Login</Link>
+            <Link to={"/auth"} className="bg-primary px-10 py-2 text-white font-semibold text-xl">Login</Link>
         </section>
   </nav>;
 }

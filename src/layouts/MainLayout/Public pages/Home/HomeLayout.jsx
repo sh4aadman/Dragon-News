@@ -5,7 +5,7 @@ import Navbar from "../../../../components/common/Navbar/Navbar";
 
 function HomeLayout() {
   return (
-    <section className="bg-white">
+    <section id="body" className="bg-white">
       <Header />
       <main className="w-5/6 mx-auto my-8">
         <LatestNews />

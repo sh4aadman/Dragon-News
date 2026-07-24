@@ -13,11 +13,15 @@
   --color-base-200: #e7e7e7;
   --color-base-300: #706f6f;
   --color-base-content: #9f9f9f;
-  --color-info: #FF8C47;
+  --color-info: #ff8c47;
+  --color-neutral: #9f9f9f;
 }
 
 body {
   font-family: "Poppins", sans-serif;
+}
+
+section#body {
   padding: 3.125rem 0;
 }
 
