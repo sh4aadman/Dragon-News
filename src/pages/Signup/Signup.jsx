@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 function Signup() {
   return (
-    <section className="mt-20 mb-10 bg-base-100 flex justify-center">
+    <section className="mt-10 mb-10 bg-base-100 flex justify-center">
       <section className="p-20 w-1/2 bg-white rounded-sm">
         <h1 className="text-primary font-semibold text-4xl text-center ">
           Register your account
