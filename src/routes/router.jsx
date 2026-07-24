@@ -4,6 +4,9 @@ import Home from "../pages/Home/Home";
 import News from "../pages/Home/News/News";
 import CategoryNews from "../pages/Home/Category News/CategoryNews";
 import Loading from "../components/ui/Loading/Loading";
+import AuthLayout from "../layouts/AuthLayout/AuthLayout";
+import Login from "../pages/Login/Login";
+import Signup from "../pages/Signup/Signup";
 
 const router = createBrowserRouter([
   {
@@ -18,13 +21,13 @@ const router = createBrowserRouter([
             path: "/",
             Component: News,
             loader: () => fetch("/news.json"),
-            hydrateFallbackElement: <Loading />
+            hydrateFallbackElement: <Loading />,
           },
           {
             path: "/category/:id",
             Component: CategoryNews,
             loader: () => fetch("/news.json"),
-            hydrateFallbackElement: <Loading />
+            hydrateFallbackElement: <Loading />,
           },
         ],
       },
@@ -40,11 +43,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/auth",
-    element: <h1>Auth Layout</h1>,
-  },
-  {
-    path: "/news",
-    element: <h1>News Layout</h1>,
+    Component: AuthLayout,
+    children: [
+      {
+        path: "/auth",
+        Component: Login,
+      },
+      {
+        path: "/auth/signup",
+        element: Signup,
+      },
+    ],
   },
   {
     path: "/*",
