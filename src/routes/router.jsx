@@ -7,6 +7,7 @@ import Loading from "../components/ui/Loading/Loading";
 import AuthLayout from "../layouts/AuthLayout/AuthLayout";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
+import NewsDetails from "../pages/News Details/NewsDetails";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,12 @@ const router = createBrowserRouter([
         Component: Signup,
       },
     ],
+  },
+  {
+    path: "/news-details/:id",
+    Component: NewsDetails,
+    loader: () => fetch("/news.json"),
+    hydrateFallbackElement: <Loading />
   },
   {
     path: "/*",

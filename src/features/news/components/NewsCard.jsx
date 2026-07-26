@@ -50,7 +50,7 @@ function NewsCard({ news }) {
             {details.slice(0, 200)}...
           </p>
           <Link
-            to={`/news/${_id}`}
+            to={`/news-details/${_id}`}
             className="mt-4 inline-block text-info font-semibold"
           >
             Read More
