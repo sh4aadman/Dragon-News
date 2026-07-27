@@ -1,9 +1,12 @@
 import { use } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/Auth/AuthProvider";
 
 function Login() {
   const { setUser, signinUser } = use(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,6 +17,7 @@ function Login() {
       .then((response) => {
         const user = response.user;
         setUser(user);
+        navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
         const errorCode = error.code;
