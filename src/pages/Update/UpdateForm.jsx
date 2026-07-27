@@ -1,36 +1,30 @@
-import { use } from "react";
-import { Link, useNavigate } from "react-router";
-import { AuthContext } from "../../context/Auth/AuthProvider";
+import { useState } from "react";
+import { Link } from "react-router";
 
-function Signup() {
-  const { setUser, createUser, updateUser } = use(AuthContext);
-
-  const navigate = useNavigate();
+function UpdateForm({ user, setUser, signinUser, updateUser, navigate }) {
+  const [name, setName] = useState(user.displayName ?? "");
+  const [photoUrl, setPhotoUrl] = useState(user.photoURL ?? "");
+  const [email, setEmail] = useState(user.email ?? "");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const photoUrl = form.photo_url.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    createUser(email, password)
+    signinUser(email, password)
       .then((response) => {
-        const user = response.user;
+        const signedInUser = response.user;
         updateUser({ displayName: name, photoURL: photoUrl })
           .then(() => {
-            setUser({ ...user, displayName: name, photoURL: photoUrl });
+            setUser({ ...signedInUser, displayName: name, photoURL: photoUrl });
+            alert("User information updated successfully");
             navigate("/");
           })
           .catch((error) => {
             alert(error);
-            setUser(user);
           });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(`${errorCode} : ${errorMessage}`);
+        setErrorMessage(error.code);
       });
   };
 
@@ -38,7 +32,7 @@ function Signup() {
     <section className="mt-10 mb-10 bg-base-100 flex justify-center">
       <section className="p-20 w-1/2 bg-white rounded-sm">
         <h1 className="text-primary font-semibold text-4xl text-center ">
-          Register your account
+          Update your account
         </h1>
         <hr className="my-12 w-full mx-auto text-base-200" />
         <form onSubmit={handleSubmit}>
@@ -49,46 +43,63 @@ function Signup() {
             <input
               type="text"
               name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="input w-full p-5 border-0 rounded-sm placeholder:text-neutral"
               placeholder="Enter your name"
               required
             />
+
             <label className="label mt-6 mb-3 text-primary font-semibold text-xl">
               Photo URL
             </label>
             <input
               type="text"
               name="photo_url"
+              value={photoUrl}
+              onChange={(e) => setPhotoUrl(e.target.value)}
               className="input w-full p-5 border-0 rounded-sm placeholder:text-neutral"
               placeholder="Enter your photo url"
               required
             />
+
             <label className="label mt-6 mb-3 text-primary font-semibold text-xl">
               Email
             </label>
             <input
               type="email"
               name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="input w-full p-5 border-0 rounded-sm placeholder:text-neutral"
               placeholder="Enter your email address"
               required
             />
+
             <label className="label mt-6 mb-3 text-primary font-semibold text-xl">
               Password
             </label>
             <input
               type="password"
               name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="input w-full p-5 border-0 rounded-sm placeholder:text-neutral"
               placeholder="Enter your password"
               required
             />
+
+            {errorMessage && (
+              <p className="text-secondary text-xs">{errorMessage}</p>
+            )}
+
             <button
               type="submit"
               className="my-7 mt-4 bg-primary py-4.5 text-white font-semibold text-xl rounded-sm"
             >
-              Register
+              Update
             </button>
+
             <section>
               <p className="text-center font-semibold text-base-300 leading-6">
                 Already have an account?{" "}
@@ -104,4 +115,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default UpdateForm;

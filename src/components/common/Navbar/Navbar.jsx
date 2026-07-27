@@ -33,7 +33,13 @@ function Navbar() {
         {navLinks}
       </ul>
       <section className="flex items-center gap-2.5">
-        <img className="w-10" src={userIcon} alt="user-icon" />
+        <Link to={"/auth/update"}>
+          <img
+            className="w-10 rounded-full border border-primary"
+            src={user ? user.photoURL : userIcon}
+            alt="user-icon"
+          />
+        </Link>
         {user ? (
           <button
             onClick={handleLogout}

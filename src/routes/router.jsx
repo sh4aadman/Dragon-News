@@ -9,6 +9,7 @@ import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
 import NewsDetails from "../pages/News Details/NewsDetails";
 import PrivateRoutes from "./privateRoutes";
+import Update from "../pages/Update/Update";
 
 const router = createBrowserRouter([
   {
@@ -52,13 +53,17 @@ const router = createBrowserRouter([
         element: <Navigate to={"/auth/login"} replace />,
       },
       {
-        path: "/auth/login",
+        path: "login",
         Component: Login,
       },
       {
-        path: "/auth/signup",
+        path: "signup",
         Component: Signup,
       },
+      {
+        path: "update",
+        Component: Update,
+      }
     ],
   },
   {

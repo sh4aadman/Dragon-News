@@ -1,8 +1,10 @@
-import { use } from "react";
+import { use, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/Auth/AuthProvider";
 
 function Login() {
+  const [error, setError] = useState("");
+
   const { setUser, signinUser } = use(AuthContext);
 
   const location = useLocation();
@@ -21,8 +23,7 @@ function Login() {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(`${errorCode} : ${errorMessage}`);
+        setError(errorCode);
       });
   };
 
@@ -43,6 +44,7 @@ function Login() {
               name="email"
               className="input w-full p-5 border-0 rounded-sm placeholder:text-neutral"
               placeholder="Enter your email address"
+              required
             />
             <label className="label mt-6 mb-3 text-primary font-semibold text-xl">
               Password
@@ -52,7 +54,9 @@ function Login() {
               name="password"
               className="input w-full p-5 border-0 rounded-sm placeholder:text-neutral"
               placeholder="Enter your password"
+              required
             />
+            {error && <p className="text-secondary text-xs">{error}</p>}
             <button
               type="submit"
               className="my-7 mt-4 bg-primary py-4.5 text-white font-semibold text-xl rounded-sm"
